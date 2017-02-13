@@ -1,9 +1,9 @@
 var mongoose = require('mongoose'); //require mongoose native drivers
-var async = require('async');
-var crypto = require('crypto');
+var async = require('async'); //require async drivers
+var crypto = require('crypto'); //require crypto drivers
 var url = 'mongodb://localhost/vaibhav'; //connection url of the database
 var conn = mongoose.connect(url); //use the connect method to conenct to the server
-var schema = new mongoose.Schema({
+var users_schema = new mongoose.Schema({
     firstname: String,
     email: String,
     lastname: String,
@@ -13,7 +13,7 @@ var schema = new mongoose.Schema({
     collection: 'Users',
 });
 
-var schema1 = mongoose.Schema({
+var usersprofile_schema = mongoose.Schema({
     user_id: String,
     dob: String,
     mobile_no: Number,
@@ -22,8 +22,8 @@ var schema1 = mongoose.Schema({
     collection: 'UsersProfile'
 })
 
-var users = conn.model('xyz', schema);
-var users_profile = conn.model('xyz1', schema1);
+var users = conn.model('xyz', users_schema);
+var users_profile = conn.model('xyz1', usersprofile_schema);
 
 var records = [];
 for (var i = 1; i <= 5; i++) {
@@ -60,51 +60,29 @@ function insertAndNotify(records, main_callback) {
                 console.log(err);
                 callback(err); // calling the callback function
             } else {
-                //var id = row.get('_id');
+                var id = row.get('_id');
                 //console.log(id);
+                update(id); // calling the update function
                 callback();
-
             }
         });
     }, function(err) {
         main_callback(err); // calling the main_callback function
-    });  
+    });
 }
 
-users.find({
-    email: /vaibhav1@gmail.com/i
-}, function(err, result) {
-    if (err) {
-        console.log(err);
-        process.exit();
-    } else {
-        for (var i = 0; i < result.length; i++) {
-            var row = result[i];
-            var id = row.get('_id');
-        }
-    }
-   users_profile.find({
-        email: /vaibhav1@gmail.com/i
-    }, function(err, result) {
+function update(id) {
+    var row = id;
+    //console.log(row);
+    var details = new users_profile({
+        user_id: id,
+        dob: "1994-12-21",
+        mobile_no: "9560234581"
+    });
+    details.save(function(err) {
         if (err) {
             console.log(err);
             process.exit();
         }
-
-        if (!result || result.length == 0) {
-            var details = new users_profile({
-                user_id: id,
-                dob: "1994-12-21",
-                mobile_no: "9560234581"
-            });
-            details.save(function(err) {
-
-                if (err) {
-                    console.log(err);
-                    process.exit();
-                }
-                console.log('Data inserted into UsersProfile')
-            });
-        }
     });
-});
+}
