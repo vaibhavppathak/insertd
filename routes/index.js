@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'); // require mongoose module
-var conn = mongoose.connect('mongodb://127.0.0.1/vaibhavp'); // connection to mongodb
+var conn = mongoose.connect('mongodb://localhost/vaibhavp'); // connection to mongodb
 var express = require('express'); // require express module
+var app = express(); // creatig insatnce of express function
 var bodyParser = require('body-parser'); //require bodyParsar module
 var router = express.Router();
 
