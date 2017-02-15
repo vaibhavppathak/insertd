@@ -1,9 +1,35 @@
 <html>
+<head><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+    $(document).ready(function() {
+        $("#reg-form-btn").click(function() {
+            var name = $("#name").val(); //alert (name);
+            var email = $("#email").val();
+            var pass = $("#pass").val();
+             $.ajax({
+            type: 'POST',
+            url: 'server.js',
+            data: {
+                    "name":name,
+                    "email":email,
+                    "password":pass,
+                    },
+            success: function (response) {
+                        console.log("data inserted")
+                    }
+                });
+             });
+        });
+</script>
+<head>
 <body>
-	<form method="get" action="/api">
-    <input type="text" name="name" value="MyName">
-    <input type="text" name="email" value="myemail@somewherefarfar.com">
-    <input type="submit" value="Submit">
-</form>
+	<form action="#" method="POST" >
+		<div>
+			Name: <input type="text" class="form-control" id="name" placeholder="name"><br>
+			Email: <input type="email" class="form-control" id="email" placeholder="Email"><br>
+			Password:<input type="password" class="form-control" id="pass" placeholder="Password"><br>
+			<button type="submit" class="btn btn-primary" id="reg-form-btn">Registration!</button>
+		</div>
+	</form>
 </body>
 </html>
