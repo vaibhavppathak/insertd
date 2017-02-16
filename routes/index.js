@@ -4,7 +4,7 @@ var router = express.Router();
 
 <!--- insert data into mongodb ---->
 
-router.all('/users/create', function(req, res) {
+router.get('/users/create', function(req, res) {
     var name = req.body.name;
     var email = req.body.email;
     var password = req.body.password;
@@ -28,7 +28,7 @@ router.all('/users/create', function(req, res) {
 
 <!--------- fetch data from mongodb through url -------->
 
-router.all('/users/create/:id', function(req, res) {
+router.all('/users/fetch/:id', function(req, res) {
     var userid = req.params.id;
     req.Collection_user.find({
         "_id": userid,
