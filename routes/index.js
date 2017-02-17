@@ -3,6 +3,7 @@ var app = express(); //creatig insatnce of express function
 var router = express.Router(); //Creating Router() object
 
 
+
 <!--- insert data into mongodb ---->
 
 router.get('/users/create', function(req, res) {
@@ -30,9 +31,10 @@ router.get('/users/create', function(req, res) {
 <!--------- fetch data from mongodb through url -------->
 
 router.all('/users/fetch/:id', function(req, res) {
-    var user_id = req.params.id;
+
+    var userid = req.params.id;
     req.Collection_user.find({
-        "_id": user_id,
+        "_id": userid,
     }, function(err, docs) {
         if (err) {
             res.json("You Entered a Invalid Id");
