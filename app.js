@@ -9,7 +9,6 @@ app.use(bodyParser.urlencoded({ extended: true })); //urlencoded within bodyPars
 app.use(db());
 app.use('/', routes);
 
-
 app.listen(8080, function() {
 	console.log("Server started at port number: 8080");
 });

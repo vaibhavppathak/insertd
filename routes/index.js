@@ -1,6 +1,8 @@
 var express = require('express'); //require express module
 var app = express(); //creatig insatnce of express function 
-var router = express.Router();
+var router = express.Router(); //Creating Router() object
+
+
 
 <!--- insert data into mongodb ---->
 
@@ -29,6 +31,7 @@ router.get('/users/create', function(req, res) {
 <!--------- fetch data from mongodb through url -------->
 
 router.all('/users/fetch/:id', function(req, res) {
+
     var userid = req.params.id;
     req.Collection_user.find({
         "_id": userid,
@@ -40,4 +43,21 @@ router.all('/users/fetch/:id', function(req, res) {
         }
     });
 });
+
+<!----- Delete data from mongodb through url  ----->
+
+router.all('/users/remove/:email', function(req, res) {
+    var email_id = req.params.email;
+    req.Collection_user.findOne({"email": email_id},function (err, data) {             
+      if(err){
+          throw err;
+        }else if(data != null){     
+            data.remove() 
+            res.json("Data removed from Database"); 
+        }else{
+           res.json("Data is not found"); 
+        }
+    });
+});
+
 module.exports = router;
