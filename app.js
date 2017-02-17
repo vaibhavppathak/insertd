@@ -9,11 +9,6 @@ app.use(bodyParser.urlencoded({ extended: true })); //urlencoded within bodyPars
 app.use(db());
 app.use('/', routes);
 
-<<<<<<< HEAD
-// Listen to this Port
-=======
-
->>>>>>> b8c7d063e6946242956b7c1fdd0b33038d7916f1
 app.listen(8080, function() {
 	console.log("Server started at port number: 8080");
 });

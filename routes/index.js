@@ -1,10 +1,7 @@
 var express = require('express'); //require express module
 var app = express(); //creatig insatnce of express function 
-<<<<<<< HEAD
 var router = express.Router(); //Creating Router() object
-=======
-var router = express.Router();
->>>>>>> b8c7d063e6946242956b7c1fdd0b33038d7916f1
+
 
 <!--- insert data into mongodb ---->
 
@@ -33,15 +30,9 @@ router.get('/users/create', function(req, res) {
 <!--------- fetch data from mongodb through url -------->
 
 router.all('/users/fetch/:id', function(req, res) {
-<<<<<<< HEAD
     var user_id = req.params.id;
     req.Collection_user.find({
         "_id": user_id,
-=======
-    var userid = req.params.id;
-    req.Collection_user.find({
-        "_id": userid,
->>>>>>> b8c7d063e6946242956b7c1fdd0b33038d7916f1
     }, function(err, docs) {
         if (err) {
             res.json("You Entered a Invalid Id");
@@ -50,7 +41,6 @@ router.all('/users/fetch/:id', function(req, res) {
         }
     });
 });
-<<<<<<< HEAD
 
 <!----- Delete data from mongodb through url  ----->
 
@@ -68,6 +58,4 @@ router.all('/users/remove/:email', function(req, res) {
     });
 });
 
-=======
->>>>>>> b8c7d063e6946242956b7c1fdd0b33038d7916f1
 module.exports = router;
